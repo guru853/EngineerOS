@@ -9,52 +9,46 @@ import {
     Code,
 } from "lucide-react";
 
+import { NavLink } from "react-router-dom";
+
 function Sidebar() {
-    const menuItems = [
-        { icon: <LayoutDashboard size={20} />, name: "Dashboard" },
-        { icon: <Brain size={20} />, name: "AI Assistant" },
-        { icon: <BookOpen size={20} />, name: "Study Hub" },
-        { icon: <NotebookPen size={20} />, name: "Notes" },
-        { icon: <CalendarDays size={20} />, name: "Planner" },
-        { icon: <FileText size={20} />, name: "Resume" },
-        { icon: <Briefcase size={20} />, name: "Placement" },
-        { icon: <Code size={20} />, name: "Coding" },
+    const menus = [
+        { name: "Dashboard", icon: <LayoutDashboard size={20} />, path: "/" },
+        { name: "AI Assistant", icon: <Brain size={20} />, path: "/ai" },
+        { name: "Study Hub", icon: <BookOpen size={20} />, path: "/study" },
+        { name: "Notes", icon: <NotebookPen size={20} />, path: "/notes" },
+        { name: "Planner", icon: <CalendarDays size={20} />, path: "/planner" },
+        { name: "Resume", icon: <FileText size={20} />, path: "/resume" },
+        { name: "Placement", icon: <Briefcase size={20} />, path: "/placement" },
+        { name: "Coding", icon: <Code size={20} />, path: "/coding" },
     ];
 
     return (
-        <aside className="w-64 min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-white border-r border-gray-200 dark:border-slate-800 transition-colors duration-300">
+        <aside className="w-64 bg-slate-950 border-r border-slate-800 text-white min-h-screen p-5">
 
-            <div className="p-6">
+            <h2 className="text-2xl font-bold mb-8">
+                MENU
+            </h2>
 
-                <h2 className="text-xl font-bold mb-8">
-                    MENU
-                </h2>
+            <div className="space-y-2">
 
-                <div className="space-y-2">
+                {menus.map((menu) => (
 
-                    {menuItems.map((item) => (
-                        <button
-                            key={item.name}
-                            className="
-                w-full
-                flex
-                items-center
-                gap-3
-                px-4
-                py-3
-                rounded-xl
-                transition
-                hover:bg-blue-100
-                dark:hover:bg-slate-800
-                hover:text-blue-600
-              "
-                        >
-                            {item.icon}
-                            <span>{item.name}</span>
-                        </button>
-                    ))}
+                    <NavLink
+                        key={menu.name}
+                        to={menu.path}
+                        className={({ isActive }) =>
+                            `flex items-center gap-3 p-3 rounded-lg transition ${isActive
+                                ? "bg-blue-600 text-white"
+                                : "hover:bg-slate-800 text-slate-300"
+                            }`
+                        }
+                    >
+                        {menu.icon}
+                        {menu.name}
+                    </NavLink>
 
-                </div>
+                ))}
 
             </div>
 
