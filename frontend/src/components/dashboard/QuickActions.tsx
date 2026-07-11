@@ -9,15 +9,33 @@ function QuickActions() {
     ];
 
     return (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8">
             {actions.map((action) => (
                 <button
                     key={action.title}
-                    className="bg-white rounded-xl shadow border p-6 hover:shadow-lg transition"
+                    className="
+            bg-white
+            dark:bg-slate-800
+            border
+            border-gray-200
+            dark:border-slate-700
+            rounded-xl
+            p-6
+            transition-all
+            duration-300
+            hover:border-blue-500
+            hover:-translate-y-1
+            hover:shadow-xl
+          "
                 >
-                    <div className="flex flex-col items-center gap-3">
-                        {action.icon}
-                        <span className="font-semibold">{action.title}</span>
+                    <div className="flex flex-col items-center gap-3 text-slate-900 dark:text-white">
+                        <div className="text-blue-500">
+                            {action.icon}
+                        </div>
+
+                        <span className="font-semibold">
+                            {action.title}
+                        </span>
                     </div>
                 </button>
             ))}

@@ -7,8 +7,9 @@ import SuggestedPrompts from "../components/ai/SuggestedPrompts";
 
 import type { ChatMessage } from "../types/chat";
 
-function AIAssistant() {
+import { sendMessage as askGemini } from "../services/gemini";
 
+function AIAssistant() {
     const [messages, setMessages] = useState<ChatMessage[]>([
         {
             id: 1,
@@ -17,7 +18,7 @@ function AIAssistant() {
         }
     ]);
 
-    function sendMessage(text: string) {
+    async function sendMessage(text: string) {
 
         const userMessage: ChatMessage = {
             id: Date.now(),
@@ -25,14 +26,17 @@ function AIAssistant() {
             message: text
         };
 
+        setMessages((prev) => [...prev, userMessage]);
+
+        const reply = await askGemini(text);
+
         const aiReply: ChatMessage = {
             id: Date.now() + 1,
             sender: "ai",
-            message: "This is a demo AI response. Soon I'll be connected to a real AI model."
+            message: reply
         };
 
-        setMessages((prev) => [...prev, userMessage, aiReply]);
-
+        setMessages((prev) => [...prev, aiReply]);
     }
 
     return (
@@ -48,7 +52,6 @@ function AIAssistant() {
 
         </div>
     );
-
 }
 
 export default AIAssistant;

@@ -10,54 +10,55 @@ import {
 } from "lucide-react";
 
 function Sidebar() {
+    const menuItems = [
+        { icon: <LayoutDashboard size={20} />, name: "Dashboard" },
+        { icon: <Brain size={20} />, name: "AI Assistant" },
+        { icon: <BookOpen size={20} />, name: "Study Hub" },
+        { icon: <NotebookPen size={20} />, name: "Notes" },
+        { icon: <CalendarDays size={20} />, name: "Planner" },
+        { icon: <FileText size={20} />, name: "Resume" },
+        { icon: <Briefcase size={20} />, name: "Placement" },
+        { icon: <Code size={20} />, name: "Coding" },
+    ];
+
     return (
-        <div className="w-64 bg-slate-800 text-white min-h-screen p-5">
-            <h2 className="text-xl font-bold mb-8">MENU</h2>
+        <aside className="w-64 min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-white border-r border-gray-200 dark:border-slate-800 transition-colors duration-300">
 
-            <div className="space-y-5">
+            <div className="p-6">
 
-                <div className="flex items-center gap-3">
-                    <LayoutDashboard size={20} />
-                    Dashboard
-                </div>
+                <h2 className="text-xl font-bold mb-8">
+                    MENU
+                </h2>
 
-                <div className="flex items-center gap-3">
-                    <Brain size={20} />
-                    AI Assistant
-                </div>
+                <div className="space-y-2">
 
-                <div className="flex items-center gap-3">
-                    <BookOpen size={20} />
-                    Study Hub
-                </div>
+                    {menuItems.map((item) => (
+                        <button
+                            key={item.name}
+                            className="
+                w-full
+                flex
+                items-center
+                gap-3
+                px-4
+                py-3
+                rounded-xl
+                transition
+                hover:bg-blue-100
+                dark:hover:bg-slate-800
+                hover:text-blue-600
+              "
+                        >
+                            {item.icon}
+                            <span>{item.name}</span>
+                        </button>
+                    ))}
 
-                <div className="flex items-center gap-3">
-                    <NotebookPen size={20} />
-                    Notes
-                </div>
-
-                <div className="flex items-center gap-3">
-                    <CalendarDays size={20} />
-                    Planner
-                </div>
-
-                <div className="flex items-center gap-3">
-                    <FileText size={20} />
-                    Resume
-                </div>
-
-                <div className="flex items-center gap-3">
-                    <Briefcase size={20} />
-                    Placement
-                </div>
-
-                <div className="flex items-center gap-3">
-                    <Code size={20} />
-                    Coding
                 </div>
 
             </div>
-        </div>
+
+        </aside>
     );
 }
 
