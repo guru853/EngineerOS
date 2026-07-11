@@ -1,47 +1,47 @@
 import { Bot, User } from "lucide-react";
+import type { ChatMessage } from "../../types/chat";
 
-function ChatMessages() {
+type Props = {
+    messages: ChatMessage[];
+};
+
+function ChatMessages({ messages }: Props) {
     return (
         <div className="bg-white rounded-xl shadow border p-6 h-[420px] overflow-y-auto space-y-6">
 
-            {/* AI Message */}
-            <div className="flex gap-3">
-                <div className="bg-blue-100 p-2 rounded-full">
-                    <Bot size={20} className="text-blue-600" />
-                </div>
+            {messages.map((msg) =>
 
-                <div className="bg-gray-100 rounded-xl p-4 max-w-xl">
-                    👋 Hello Guru!
+                msg.sender === "ai" ? (
 
-                    <br /><br />
+                    <div key={msg.id} className="flex gap-3">
 
-                    I'm EngineerOS AI.
+                        <div className="bg-blue-100 p-2 rounded-full">
+                            <Bot size={20} className="text-blue-600" />
+                        </div>
 
-                    Ask me anything about:
+                        <div className="bg-gray-100 rounded-xl p-4 max-w-xl">
+                            {msg.message}
+                        </div>
 
-                    <ul className="list-disc ml-5 mt-2">
-                        <li>Programming</li>
-                        <li>AI & ML</li>
-                        <li>DBMS</li>
-                        <li>Operating System</li>
-                        <li>Resume</li>
-                        <li>Placements</li>
-                    </ul>
-                </div>
-            </div>
+                    </div>
 
-            {/* User Message */}
-            <div className="flex justify-end gap-3">
+                ) : (
 
-                <div className="bg-blue-600 text-white rounded-xl p-4 max-w-md">
-                    Explain Binary Search.
-                </div>
+                    <div key={msg.id} className="flex justify-end gap-3">
 
-                <div className="bg-blue-100 p-2 rounded-full">
-                    <User size={20} className="text-blue-700" />
-                </div>
+                        <div className="bg-blue-600 text-white rounded-xl p-4 max-w-md">
+                            {msg.message}
+                        </div>
 
-            </div>
+                        <div className="bg-blue-100 p-2 rounded-full">
+                            <User size={20} className="text-blue-700" />
+                        </div>
+
+                    </div>
+
+                )
+
+            )}
 
         </div>
     );
